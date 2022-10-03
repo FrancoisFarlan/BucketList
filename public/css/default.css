@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto Light', sans-serif;
+}
+
+#logo {
+    height : 60px !important;
+    color: white;
+}
