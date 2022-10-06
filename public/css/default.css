@@ -7,3 +7,19 @@
     height : 60px !important;
     color: white;
 }
+
+label {
+    display: block;
+}
+
+input, textarea {
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 300px;
+    max-width: 50%;
+}
+
+.flash-success {
+    background-color: green;
+    color: white;
+}
