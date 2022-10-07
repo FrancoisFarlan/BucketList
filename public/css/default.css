@@ -12,7 +12,7 @@ label {
     display: block;
 }
 
-input, textarea {
+input, textarea, select {
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 300px;

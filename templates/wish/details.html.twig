@@ -9,7 +9,7 @@
 
     <section>
         <article>
-            <h3>{{ wish.title }}</h3>
+            <h3>{{ wish.title }} | {{ wish.categories.name }}</h3>
             <h5>Par {{ wish.author }}</h5>
             <p>{{ wish.description }}</p>
             <p>Créé le {{ wish.dateCreated | date('d/m/Y à H:i')}}</p>
