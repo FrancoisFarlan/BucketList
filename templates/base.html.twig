@@ -34,13 +34,24 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav"
+                    <ul class="navbar-nav">
+                        {% if app.user %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_logout') }}" title="Lougout">Logout (Hello {{ app.user.userIdentifier }})</a>
+                            </li>
+                        {% else %} <a class="nav-link" href="{{ path('app_register') }}" title="Create your account">Register</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_login') }}" title="Login">Login</a>
+                            </li>
+                        {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('wish_list')}}">Souhaits</a>
                     </li>
+                        {% if app.user %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('wish_ajout') }}">Ajouter</a>
                     </li>
+                        {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_main_about') }}">A propos</a>
                     </li>

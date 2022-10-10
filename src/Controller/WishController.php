@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\WishRepository;
+use App\Util\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,16 +43,24 @@ class WishController extends AbstractController
     /**
      * @Route("/ajout", name="ajout")
      */
-    public function ajouter(Request $request, EntityManagerInterface $entityManager): Response {
+    public function ajouter(Request $request,
+                            EntityManagerInterface $entityManager,
+                            Censurator $censurator): Response {
 
         $wish = new Wish();
         $wish->setDateCreated(new \DateTime());
         $wish->setIsPublished(true);
 
+        $currentUserUsername = $this->getUser()->getUserIdentifier();
+        $wish->setAuthor($currentUserUsername);
+
         $wishForm = $this->createForm(WishType::class, $wish);
         $wishForm->handleRequest($request);
 
         if($wishForm->isSubmitted() && $wishForm->isValid()) {
+            //censure les mots définis dans le service
+            $wish->setDescription($censurator->purify($wish->getDescription()));
+
             $entityManager->persist($wish);
             $entityManager->flush();
 
